@@ -12,6 +12,11 @@ describe(Task) do
     expect(task.save()).to(eq(false))
   end
 
+  it("converts the name to lowercase") do
+    task = Task.create({:description => "STAB THE LAMBDA"})
+    expect(task.description()).to(eq("stab the lambda"))
+  end
+
   describe('.not_done') do
     it('returns the not_done tasks') do
       not_done_task1 = Task.create({:description => "gotta do it", :done => false})

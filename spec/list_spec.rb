@@ -12,6 +12,11 @@ describe(List) do
     expect(list.save()).to(eq(false))
   end
 
+  # it('converts the list name to lowercase') do
+  #   list = List.create({:name => "BINDING.PRY"})
+  #   expect(list.description()).to(eq("binding.pry"))
+  # end
+
   describe('#tasks') do
     it('tells which tasks are in it') do
       test_list = List.create({:name => "list"})
@@ -20,4 +25,6 @@ describe(List) do
       expect(test_list.tasks()).to(eq([test_task1, test_task2]))
     end
   end
+
+
 end
