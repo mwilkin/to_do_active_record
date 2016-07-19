@@ -13,11 +13,15 @@ get('/') do
 end
 
 post('/lists') do
-  name = params.fetch("name")
-  list = List.new({:name => name, :id => nil})
-  list.save()
   @lists = List.all()
-  erb(:list_success)
+  @task
+  name = params.fetch("name")
+  @list = List.new({:name => name, :id => nil})
+  if @list.save()
+    erb(:list_success)
+  else
+    erb(:list_errors)
+  end
 end
 
 get('/lists/new') do
@@ -55,7 +59,7 @@ post('/tasks') do
   if @task.save()
     erb(:task_success)
   else
-    erb(:errors)
+    erb(:task_errors)
   end
 end
 

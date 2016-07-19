@@ -1,6 +1,17 @@
 require('spec_helper')
 
 describe(List) do
+
+  it("validates presence of description") do
+    list = List.new({:name => ""})
+    expect(list.save()).to(eq(false))
+  end
+
+  it("ensures the length of task name is at most 20 characters") do
+    list = List.new({:name => "a".*(21)})
+    expect(list.save()).to(eq(false))
+  end
+
   describe('#tasks') do
     it('tells which tasks are in it') do
       test_list = List.create({:name => "list"})
