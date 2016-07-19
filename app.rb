@@ -51,9 +51,12 @@ post('/tasks') do
   due_date = params.fetch('due-date')
   list_id = params.fetch('list_id').to_i()
   @list = List.find(list_id)
-  @task = Task.new({:description => description, :list_id => list_id, :due_date => due_date})
-  @task.save()
-  erb(:task_success)
+  @task = Task.new({:description => description, :list_id => list_id, :due_date => due_date, :done => false})
+  if @task.save()
+    erb(:task_success)
+  else
+    erb(:errors)
+  end
 end
 
 # get('/lists/:id/edit') do
